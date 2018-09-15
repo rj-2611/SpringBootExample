@@ -1,0 +1,39 @@
+buildscript {
+    ext {
+		springBootVersion = '1.4.3.RELEASE'
+	}
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+ 
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'spring-boot'
+ 
+jar {
+    baseName = 'spring-boot-example'
+    version =  '1.0'
+}
+ 
+repositories {
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-milestone" }
+}
+ 
+configurations {
+    providedRuntime
+}
+ 
+dependencies {
+    compile ("org.springframework.boot:spring-boot-starter-web")
+    providedRuntime("org.apache.tomcat.embed:tomcat-embed-jasper")
+    
+}
+ 
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
+}
